@@ -1,26 +1,26 @@
 // use prisma-8
 model Product {
-  id            String      @id @default(uuid())
+  id            String            @id @default(uuid())
   name          String
   description   String
   price         Float
   image         String
   stripePriceId String
-  isFeatured    Boolean     @default(false)
+  isFeatured    Boolean           @default(false)
   orderItems    OrderItem[]
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now())
+  createdAt     TimestamptzString @default(now())
+  updatedAt     TimestamptzString @default(now())
 }
 
 model Order {
-  id          String      @id @default(uuid())
+  id          String            @id @default(uuid())
   userId      String? // Firebase Auth UID (optional for guest orders)
-  status      OrderStatus @default(PENDING)
+  status      OrderStatus       @default(PENDING)
   totalAmount Float
   paymentId   String?
   items       OrderItem[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @default(now())
+  createdAt   TimestamptzString @default(now())
+  updatedAt   TimestamptzString @default(now())
 }
 
 model OrderItem {

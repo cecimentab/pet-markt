@@ -2,5 +2,20 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./apps/pet-markt-be-e2e"
+    },
+    {
+      "path": "./apps/pet-markt-be"
+    }
+  ],
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "types": [
+      "node"
+    ]
+  }
 }

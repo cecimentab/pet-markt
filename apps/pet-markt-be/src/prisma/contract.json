@@ -45,7 +45,7 @@
               "createdAt": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "kind": "scalar"
                 }
               },
@@ -86,7 +86,7 @@
               "updatedAt": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "kind": "scalar"
                 }
               },
@@ -242,7 +242,7 @@
               "createdAt": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "kind": "scalar"
                 }
               },
@@ -298,7 +298,7 @@
               "updatedAt": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "kind": "scalar"
                 }
               }
@@ -373,7 +373,7 @@
               ],
               "columns": {
                 "createdAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "default": {
                     "expression": "now()",
                     "kind": "function"
@@ -412,7 +412,7 @@
                   "nullable": false
                 },
                 "updatedAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "default": {
                     "expression": "now()",
                     "kind": "function"
@@ -525,7 +525,7 @@
             "product": {
               "columns": {
                 "createdAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "default": {
                     "expression": "now()",
                     "kind": "function"
@@ -573,7 +573,7 @@
                   "nullable": false
                 },
                 "updatedAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
+                  "codecId": "pg/timestamptz-string@1",
                   "default": {
                     "expression": "now()",
                     "kind": "function"
@@ -607,7 +607,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "957afe18d5a3a5136db0f60fb692e47eda5cc7474174e8cc6b1ef9d354256704"
+    "storageHash": "572802f6cbbb1753330f3ec02d26250eb0f6ec0dc540fd19a1527ff569cd8f8d"
   },
   "execution": {
     "executionHash": "823858d9bbd5e5930ebfa2b9999878a1f0c1ecc7bb08a439b113f729a3e34241",
