@@ -1,6 +1,5 @@
 {
   "name": "@pet-markt/pet-markt-be",
-  "type": "module",
   "version": "0.0.1",
   "private": true,
   "nx": {
