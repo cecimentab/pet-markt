@@ -1,16 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
-
+import { db } from './../../prisma/db';
 @Injectable()
 export class ProductsService {
   create(createProductInput: CreateProductInput) {
     return 'This action adds a new product';
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll() {
+    try {
+      const products = await db.orm.public.Product.all();
+      return products;
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+      throw new InternalServerErrorException('Unable to fetch products');
+    }
   }
+
 
   findOne(id: number) {
     return `This action returns a #${id} product`;
