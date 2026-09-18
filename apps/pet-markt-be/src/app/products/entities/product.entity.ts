@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class Product {
@@ -24,8 +24,8 @@ export class Product {
   isFeatured!: boolean;
 
   @Field()
-  createdAt!: Date;
+  createdAt!: string;
 
   @Field()
-  updatedAt!: Date;
+  updatedAt!: string;
 }

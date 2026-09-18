@@ -20,8 +20,13 @@ export class ProductsResolver {
     return this.productsService.findAll();
   }
 
+  @Query(() => [Product], { name: 'searchProducts' })
+  searchProducts(@Args('term', { type: () => String }) term: string) {
+    return this.productsService.searchProducts(term);
+  }
+
   @Query(() => Product, { name: 'product' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.productsService.findOne(id);
   }
 
@@ -36,7 +41,7 @@ export class ProductsResolver {
   }
 
   @Mutation(() => Product)
-  removeProduct(@Args('id', { type: () => Int }) id: number) {
+  removeProduct(@Args('id', { type: () => String }) id: string) {
     return this.productsService.remove(id);
   }
 }
