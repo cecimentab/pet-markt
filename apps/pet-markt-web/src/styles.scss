@@ -1,2 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 @use "tailwindcss";
+@plugin "daisyui" {
+  themes: light, dark, cupidity; /* Choose your themes */
+  prefix: "daisy-";             /* Optional: prefix for all daisyUI classes */
+  logs: false;                  /* Disable console logs on build */
+}
