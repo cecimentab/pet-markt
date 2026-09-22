@@ -100,8 +100,9 @@ export default definePrismaConfig({
 
 Notice the `DATABASE_URL` above? It's defined in your [`.env`](./.env) file:
 
+
 ```env
-DATABASE_URL="postgresql://neondb_owner:npg_j4mGoh1tZVKu@ep-delicate-field-zalbx51w-pooler.c-2.eu-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+DATABASE_URL="http..."
 ```
 
 You can customize how your environment variables are loaded by changing or removing the `import 'dotenv/config'` line.

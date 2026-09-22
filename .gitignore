@@ -49,4 +49,8 @@ node_modules/
 dist/
 .env
 
+.agents
+.claude
+.cursor
+.devin
 .angular
