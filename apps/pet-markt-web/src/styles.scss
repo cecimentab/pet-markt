@@ -1,6 +1,7 @@
-@use "tailwindcss";
+@use 'tailwindcss';
 @plugin "daisyui" {
-  themes: light, dark, cupidity; /* Choose your themes */
-  prefix: "daisy-";             /* Optional: prefix for all daisyUI classes */
-  logs: false;                  /* Disable console logs on build */
+  themes:
+    light --default,
+    dark --prefersdark,
+    synthwave;
 }
