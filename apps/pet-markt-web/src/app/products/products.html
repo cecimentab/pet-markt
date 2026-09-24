@@ -1,16 +1,27 @@
-<p>products works!</p>
-@if(productStore.loading()) {
-<div>Loading...</div>
-} @else if (productStore.error()) {
-<div>{{ productStore.error() }}</div>
-} @else if (productStore.products().length) {
-<ul>
-  @for (product of productStore.products(); track product.id) {
-  <li>{{ product | json }}</li>
+<div class="container mx-auto px-4">
+  <div class="mb-4">
+    <!-- search input -->
+  </div>
+  @if(productStore.loading()) {
+  <div>
+    <h1>Loading...</h1>
+  </div>
+  } @else if (productStore.error()) {
+  <div class="alert alert-error">
+    <!-- error loading products -->
+    <span>Error {{productStore.error()}}</span>
+  </div>
+  } @else if (productStore.products().length) {
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols3 lg:grid-cols-2 gap-6 auto-rows-fr"
+  >
+    <!-- Loop over products -->
+    @for(product of productStore.products(); track product.id; let idx = $index)
+    {
+    <app-product-card [product]="product" [index]="idx" />
+    }
+    <!-- product card -->
+  </div>
+  <ul></ul>
   }
-</ul>
-}
-
-<pre>
-    {{productStore | json}}
-</pre>
+</div>

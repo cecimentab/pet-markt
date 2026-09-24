@@ -14,14 +14,6 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; connect-src 'self' http://localhost:3000",
-  );
-  next();
-});
-
 /**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
