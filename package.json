@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "contract:emit": "prisma contract emit"
+    "contract:emit": "prisma contract emit",
+    "prepare": "husky install"
   },
   "private": true,
   "devDependencies": {
@@ -43,11 +44,13 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^1.6.2",
+    "husky": "^9.1.7",
     "jest": "~30.3.0",
     "jest-environment-jsdom": "~30.3.0",
     "jest-environment-node": "~30.3.0",
     "jest-preset-angular": "~17.0.0",
     "jest-util": "~30.3.0",
+    "lint-staged": "^17.6.0",
     "nx": "23.2.1",
     "prettier": "~3.6.2",
     "prisma": "8.0.0-rc.11",
@@ -95,5 +98,9 @@
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.0",
     "tailwindcss": "^4.3.3"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix",
+    "*.{ts,html,json,js,scss,css,md}": "prettier --write"
   }
 }
