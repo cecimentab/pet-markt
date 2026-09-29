@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { Apollo, gql } from 'apollo-angular';
-import { tap } from 'rxjs';
+import { catchError, EMPTY, map, tap } from 'rxjs';
 import { Product } from '../interfaces/product';
 
 const GET_PRODUCTS = gql`
@@ -16,7 +16,18 @@ const GET_PRODUCTS = gql`
     }
   }
 `;
-
+const SEARCH_PRODUCTS = gql`
+  query SearchProducts($searchTerm: String!) {
+  searchProducts(term:$searchTerm) {
+    id
+    description
+    price
+    image
+    stripePriceId
+    name
+  }
+}
+`;
 export interface ProductState {
   products: Product[];
   featuredProducts: Product[];
@@ -27,7 +38,7 @@ export interface ProductState {
 const initialState: ProductState = {
   products: [],
   featuredProducts: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -52,6 +63,26 @@ export const ProductStore = signalStore(
               }),
             error: (error) =>
               patchState(store, { error: error.message, loading: false }),
+          })
+        )
+        .subscribe();
+    },
+    searchProducts(term: string) {
+      patchState(store, { loading: true, error: null });
+      apollo
+        .query<{ searchProducts: Product[] }>({
+          query: SEARCH_PRODUCTS,
+          variables:{ 
+            searchTerm:term
+          }
+        })
+        .pipe(
+          map(({data}) =>
+            patchState(store, { products: data?.searchProducts, loading: false}),
+          ),
+          catchError((error)=>{
+            patchState(store, { error: error.message, loading: false });
+            return EMPTY; 
           })
         )
         .subscribe();
