@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import {Product} from '../../interfaces/product';
+import { Component, input, output } from '@angular/core';
+import { Product } from '../../interfaces/product';
 
 @Component({
   selector: 'app-product-card',
@@ -8,6 +8,11 @@ import {Product} from '../../interfaces/product';
   styleUrl: './product-card.scss',
 })
 export class ProductCard {
-  product = input.required<Product>(); 
+  product = input.required<Product>();
   index = input.required<number>();
+  addToCart = output<Product>();
+
+  onAddToCart(product: Product) {
+    this.addToCart.emit(product);
+  }
 }

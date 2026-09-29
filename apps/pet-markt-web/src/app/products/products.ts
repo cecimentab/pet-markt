@@ -11,7 +11,8 @@ import { ProductStore } from '../stores/product.store';
 import { ProductCard } from '../components/product-card/product-card';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CartStore } from '../stores/cart.store';
 @Component({
   selector: 'app-products',
   imports: [ProductCard, FormsModule],
@@ -21,20 +22,17 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 export class Products {
   searchTerm = signal('');
   private environmentInjector = inject(EnvironmentInjector);
-  productStore = inject(ProductStore)
+  productStore = inject(ProductStore);
+  cartStore = inject(CartStore);
   searchSubject = new Subject<string>();
 
   constructor() {
     this.productStore.loadProducts();
 
     afterNextRender(() => {
-      runInInjectionContext(this.environmentInjector, () => {    
+      runInInjectionContext(this.environmentInjector, () => {
         this.searchSubject
-          .pipe(
-            debounceTime(500), 
-            distinctUntilChanged(),
-            takeUntilDestroyed(),
-          )
+          .pipe(debounceTime(500), distinctUntilChanged(), takeUntilDestroyed())
           .subscribe((term) => {
             this.productStore.searchProducts(term);
           });
