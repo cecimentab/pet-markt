@@ -30,6 +30,13 @@ export const CartStore = signalStore(
       }, 0),
     ),
   })),
+  withComputed((store) => ({
+    totalAmount: computed(() =>
+      store.items().reduce((acc, item) => {
+        return acc + item.quantity * item.price;
+      }, 0),
+    ),
+  })),
   withMethods((store) => ({
     addToCart(product: Product, quantity = 1) {
       const currentItems = store.items();
@@ -60,6 +67,21 @@ export const CartStore = signalStore(
           ],
         });
       }
+    },
+    updateQuantity(productId: string, quantity: number) {
+      const updateItems = store
+        .items()
+        .map((item) => (item.id === productId ? { ...item, quantity } : item));
+      patchState(store, { items: updateItems });
+    },
+    removeFromCart(productId: string) {
+      const updatedItems = store
+        .items()
+        .filter((item) => item.id !== productId);
+      patchState(store, { items: updatedItems });
+    },
+    clearStore() {
+      patchState(store, { items: [] });
     },
   })),
 );
