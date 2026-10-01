@@ -8,6 +8,7 @@ import {
 import { Product } from '../interfaces/product';
 import { computed } from '@angular/core';
 
+const CART_LOCALSTORAGE_KEY = 'pet_markt_cart';
 type CartItem = Product & {
   quantity: number;
 };
@@ -22,7 +23,17 @@ export const CartStore = signalStore(
   {
     providedIn: 'root',
   },
-  withState(() => initialState),
+  withState(() => {
+    if ('localStorage' in globalThis) {
+      return {
+        ...initialState,
+        items: JSON.parse(
+          localStorage.getItem(CART_LOCALSTORAGE_KEY) ?? '[]',
+        ) as CartItem[],
+      };
+    }
+    return initialState;
+  }),
   withComputed((store) => ({
     totalItems: computed(() =>
       store.items().reduce((acc, item) => {
@@ -67,21 +78,34 @@ export const CartStore = signalStore(
           ],
         });
       }
+      localStorage.setItem(
+        CART_LOCALSTORAGE_KEY,
+        JSON.stringify(store.items()),
+      );
     },
     updateQuantity(productId: string, quantity: number) {
       const updateItems = store
         .items()
         .map((item) => (item.id === productId ? { ...item, quantity } : item));
       patchState(store, { items: updateItems });
+      localStorage.setItem(
+        CART_LOCALSTORAGE_KEY,
+        JSON.stringify(store.items()),
+      );
     },
     removeFromCart(productId: string) {
       const updatedItems = store
         .items()
         .filter((item) => item.id !== productId);
       patchState(store, { items: updatedItems });
+      localStorage.setItem(
+        CART_LOCALSTORAGE_KEY,
+        JSON.stringify(store.items()),
+      );
     },
     clearStore() {
       patchState(store, { items: [] });
+      localStorage.removeItem(CART_LOCALSTORAGE_KEY);
     },
   })),
 );
