@@ -3,7 +3,7 @@ import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { db } from './../../prisma/db';
 import { or } from '@prisma/orm-postgres/orm-client';
-import {Product} from './entities/product.entity';
+import { Product } from './entities/product.entity';
 @Injectable()
 export class ProductsService {
   create(createProductInput: CreateProductInput) {
@@ -35,14 +35,12 @@ export class ProductsService {
   async searchProducts(term: string): Promise<Product[]> {
     const searchTerm = term.trim();
     try {
-      const products = await db.orm.public.Product
-        .where((product) =>
-          or(
-            product.name.ilike(`%${searchTerm}%`),
-            product.description.ilike(`%${searchTerm}%`),
-          ),
-        )
-        .all();
+      const products = await db.orm.public.Product.where((product) =>
+        or(
+          product.name.ilike(`%${searchTerm}%`),
+          product.description.ilike(`%${searchTerm}%`),
+        ),
+      ).all();
       return products;
     } catch (error) {
       console.error('Failed to search products:', error);

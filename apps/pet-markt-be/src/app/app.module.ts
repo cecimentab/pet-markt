@@ -5,7 +5,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
-import { ProductsModule } from './products/products.module';
+import { OrdersModule } from './orders/orders.module';
+import { CheckoutModule } from './checkout/checkout.module';
 
 @Module({
   imports: [
@@ -14,6 +15,8 @@ import { ProductsModule } from './products/products.module';
       autoSchemaFile: join(process.cwd(), 'apps/pet-markt-be/dist/schema.gql'),
     }),
     ProductsModule,
+    CheckoutModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
