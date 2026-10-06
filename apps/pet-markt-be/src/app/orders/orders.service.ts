@@ -9,26 +9,19 @@ export class OrdersService {
   async create(createOrderInput: CreateOrderInput) {
     const { totalAmount, items } = createOrderInput;
 
-    return db.orm.public.Order.create({
+    return db.orm.public.Order.include('items', (orderItem) =>
+      orderItem.include('product'),
+    ).create({
       totalAmount,
       status: OrderStatus.PENDING,
-      items: {
-        create: items.map((item) => ({
-          productId: item.productId,
-          quantity: item.quantity,
-          price: item.price,
-          product: {
-            connect: { id: item.productId },
-          },
-        })),
-      },
-      include: {
-        items: {
-          include: {
-            product: true,
-          },
-        },
-      },
+      items: (relation) =>
+        relation.create(
+          items.map((item) => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+        ),
     });
   }
 

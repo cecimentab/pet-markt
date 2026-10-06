@@ -20,9 +20,6 @@ export class CreateOrderInput {
   @Field(() => Float)
   totalAmount!: number;
 
-  @Field(() => String, { nullable: true })
-  customerId?: string;
-
   // @Field(() => String)
   // token!: string;
 }

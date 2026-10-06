@@ -21,4 +21,7 @@ export class Order {
 
   @Field(() => String)
   createdAt!: string;
+
+  @Field(() => String)
+  updatedAt!: string;
 }
