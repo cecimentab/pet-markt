@@ -18,15 +18,15 @@ const GET_PRODUCTS = gql`
 `;
 const SEARCH_PRODUCTS = gql`
   query SearchProducts($searchTerm: String!) {
-  searchProducts(term:$searchTerm) {
-    id
-    description
-    price
-    image
-    stripePriceId
-    name
+    searchProducts(term: $searchTerm) {
+      id
+      description
+      price
+      image
+      stripePriceId
+      name
+    }
   }
-}
 `;
 export interface ProductState {
   products: Product[];
@@ -56,14 +56,14 @@ export const ProductStore = signalStore(
         })
         .valueChanges.pipe(
           tap({
-            next: ({ data }) =>
+            next: ({ data, loading }) =>
               patchState(store, {
                 products: (data?.products ?? []) as Product[],
-                loading: false,
+                loading,
               }),
             error: (error) =>
               patchState(store, { error: error.message, loading: false }),
-          })
+          }),
         )
         .subscribe();
     },
@@ -72,20 +72,23 @@ export const ProductStore = signalStore(
       apollo
         .query<{ searchProducts: Product[] }>({
           query: SEARCH_PRODUCTS,
-          variables:{ 
-            searchTerm:term
-          }
+          variables: {
+            searchTerm: term,
+          },
         })
         .pipe(
-          map(({data}) =>
-            patchState(store, { products: data?.searchProducts, loading: false}),
+          map(({ data }) =>
+            patchState(store, {
+              products: data?.searchProducts,
+              loading: false,
+            }),
           ),
-          catchError((error)=>{
+          catchError((error) => {
             patchState(store, { error: error.message, loading: false });
-            return EMPTY; 
-          })
+            return EMPTY;
+          }),
         )
         .subscribe();
     },
-  }))
+  })),
 );
