@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ApolloTestingModule } from 'apollo-angular/testing';
 import { Products } from './products';
 
 describe('Products', () => {
@@ -7,7 +8,7 @@ describe('Products', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Products],
+      imports: [Products, ApolloTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Products);

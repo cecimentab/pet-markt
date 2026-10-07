@@ -1,6 +1,6 @@
 module.exports = {
   displayName: 'pet-markt-web',
-  preset: '../../jest.preset.js',
+  preset: '../../jest.preset.cjs',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/apps/pet-markt-web',
   transform: {
