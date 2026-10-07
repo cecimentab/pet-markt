@@ -54,3 +54,6 @@ dist/
 .cursor
 .devin
 .angular
+
+# eslint
+.eslintcache

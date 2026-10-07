@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "contract:emit": "prisma contract emit",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "private": true,
   "devDependencies": {
@@ -101,7 +101,10 @@
     "tailwindcss": "^4.3.3"
   },
   "lint-staged": {
-    "*.ts": "eslint --cache --fix",
-    "*.{ts,html,json,js,scss,css,md}": "prettier --write"
+    "*.ts": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*.{html,json,js,scss,css,md}": "prettier --write"
   }
 }

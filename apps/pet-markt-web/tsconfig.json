@@ -6,6 +6,7 @@
     "composite": false,
     "emitDeclarationOnly": false,
     "declaration": false,
+    "declarationMap": false,
     "strict": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -22,7 +23,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
-    "typeCheckHostBindings": true,
+    "typeCheckHostBindings": true
   },
   "files": [],
   "include": [],
