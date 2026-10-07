@@ -29,8 +29,12 @@ export class OrdersService {
     return `This action returns all orders`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  findOne(id: string) {
+    return db.orm.public.Order.include('items', (orderItem) =>
+      orderItem.include('product'),
+    )
+      .where({ id })
+      .first();
   }
 
   update(id: number, updateOrderInput: UpdateOrderInput) {

@@ -13,23 +13,23 @@ export class OrdersResolver {
     return this.ordersService.create(createOrderInput);
   }
 
-  @Query(() => [Order], { name: 'orders' })
-  findAll() {
-    return this.ordersService.findAll();
-  }
+  // @Query(() => [Order], { name: 'orders' })
+  // findAll() {
+  //   return this.ordersService.findAll();
+  // }
 
   @Query(() => Order, { name: 'order' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.ordersService.findOne(id);
   }
 
-  @Mutation(() => Order)
-  updateOrder(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
-    return this.ordersService.update(updateOrderInput.id, updateOrderInput);
-  }
+  // @Mutation(() => Order)
+  // updateOrder(@Args('updateOrderInput') updateOrderInput: UpdateOrderInput) {
+  //   return this.ordersService.update(updateOrderInput.id, updateOrderInput);
+  // }
 
-  @Mutation(() => Order)
-  removeOrder(@Args('id', { type: () => Int }) id: number) {
-    return this.ordersService.remove(id);
-  }
+  // @Mutation(() => Order)
+  // removeOrder(@Args('id', { type: () => Int }) id: number) {
+  //   return this.ordersService.remove(id);
+  // }
 }
