@@ -10,9 +10,11 @@ export class ProductsService {
     return 'This action adds a new product';
   }
 
-  async findAll() {
+  async findAll(config: { featured?: boolean } = {}): Promise<Product[]> {
     try {
-      const products = await db.orm.public.Product.all();
+      const products = await db.orm.public.Product.where(
+        config.featured ? { isFeatured: true } : {},
+      ).all();
       return products;
     } catch (error) {
       console.error('Failed to fetch products:', error);
