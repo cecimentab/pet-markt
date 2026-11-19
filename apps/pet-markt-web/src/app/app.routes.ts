@@ -49,6 +49,20 @@ export const appRoutes: Route[] = [
     },
   },
   {
+    path: 'auth/login',
+    loadComponent: async () => {
+      const mod = await import('./auth/login/login');
+      return mod.Login;
+    },
+  },
+  {
+    path: 'auth/signup',
+    loadComponent: async () => {
+      const mod = await import('./auth/signup/signup');
+      return mod.Signup;
+    },
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
