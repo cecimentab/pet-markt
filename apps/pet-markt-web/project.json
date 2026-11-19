@@ -7,7 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@ngx-env/builder:application",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -22,6 +22,9 @@
           }
         ],
         "styles": ["apps/pet-markt-web/src/styles.scss"],
+        "ngxEnv": {
+          "prefix": "NG_APP"
+        },
         "server": "apps/pet-markt-web/src/main.server.ts",
         "ssr": {
           "entry": "apps/pet-markt-web/src/server.ts"
@@ -53,7 +56,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular/build:dev-server",
+      "executor": "@ngx-env/builder:dev-server",
       "options": {
         "headers": {
           "Content-Security-Policy": "default-src 'self'; connect-src 'self' http://localhost:3000"
