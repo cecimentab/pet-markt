@@ -57,11 +57,6 @@
     "serve": {
       "continuous": true,
       "executor": "@ngx-env/builder:dev-server",
-      "options": {
-        "headers": {
-          "Content-Security-Policy": "default-src 'self'; connect-src 'self' http://localhost:3000"
-        }
-      },
       "defaultConfiguration": "development",
       "configurations": {
         "production": {
